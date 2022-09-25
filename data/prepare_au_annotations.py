@@ -15,7 +15,7 @@ def get_data(filepaths):
     data = dict()
     i=0
     for filepath in tqdm(filepaths):
-        label = np.loadtxt(filepath, delimiter=',', skiprows=1, dtype=str)
+        label = np.loadtxt(filepath, delimiter=',',  dtype=str)
         content = np.loadtxt('imgs.csv', delimiter=',', skiprows=1, dtype=str)
         #data[os.path.basename(filepath[:-4])] = content.tolist()[2:19]
         #data[os.path.basename(filepath[:-4])] = content
