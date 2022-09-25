@@ -29,7 +29,7 @@ class AusDataset(DatasetBase):
 
             # get sample data
             sample_id = self._ids[index]
-
+            
             real_img, real_img_path = self._get_img_by_id(sample_id)
             real_cond = self._get_cond_by_id(sample_id)
 
@@ -70,7 +70,7 @@ class AusDataset(DatasetBase):
         # read aus
         conds_filepath = os.path.join(self._root, self._opt.aus_file)
         self._conds = self._read_conds(conds_filepath)
-
+        
         self._ids = list(set(self._ids).intersection(set(self._conds.keys())))
 
         # dataset size
@@ -96,7 +96,8 @@ class AusDataset(DatasetBase):
 
     def _read_conds(self, file_path):
         with open(file_path, 'rb') as f:
-            return pickle.load(f)
+            #return pickle.load(f)
+            return pickle.load(f, encoding='ISO-8859-1')
 
     def _get_cond_by_id(self, id):
         if id in self._conds:

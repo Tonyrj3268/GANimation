@@ -103,9 +103,9 @@ class GANimation(BaseModel):
         self._input_real_img_path = input['real_img_path']
 
         if len(self._gpu_ids) > 0:
-            self._input_real_img = self._input_real_img.cuda(self._gpu_ids[0], async=True)
-            self._input_real_cond = self._input_real_cond.cuda(self._gpu_ids[0], async=True)
-            self._input_desired_cond = self._input_desired_cond.cuda(self._gpu_ids[0], async=True)
+            self._input_real_img = self._input_real_img.cuda(self._gpu_ids[0], async_=True)
+            self._input_real_cond = self._input_real_cond.cuda(self._gpu_ids[0], async_=True)
+            self._input_desired_cond = self._input_desired_cond.cuda(self._gpu_ids[0], async_=True)
 
     def set_train(self):
         self._G.train()
@@ -123,9 +123,10 @@ class GANimation(BaseModel):
     def forward(self, keep_data_for_visuals=False, return_estimates=False):
         if not self._is_train:
             # convert tensor to variables
-            real_img = Variable(self._input_real_img, volatile=True)
-            real_cond = Variable(self._input_real_cond, volatile=True)
-            desired_cond = Variable(self._input_desired_cond, volatile=True)
+            with torch.no_grad():
+              real_img = Variable(self._input_real_img)
+              real_cond = Variable(self._input_real_cond)
+              desired_cond = Variable(self._input_desired_cond)
 
             # generate fake images
             fake_imgs, fake_img_mask = self._G.forward(real_img, desired_cond)
