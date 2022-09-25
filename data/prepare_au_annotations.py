@@ -14,8 +14,8 @@ args = parser.parse_args()
 def get_data(filepaths):
     data = dict()
     for filepath in tqdm(filepaths):
-        content = np.loadtxt(filepath, delimiter=', ', skiprows=1)
-        data[os.path.basename(filepath[:-4])] = content[2:19]
+        content = np.loadtxt(filepath, delimiter=',', skiprows=1, dtype=str)
+        data[os.path.basename(filepath[:-4])] = content.tolist()[2:19]
 
     return data
 
