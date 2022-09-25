@@ -13,9 +13,17 @@ args = parser.parse_args()
 
 def get_data(filepaths):
     data = dict()
+    i=0
     for filepath in tqdm(filepaths):
-        content = np.loadtxt(filepath, delimiter=',', skiprows=1, dtype=str)
-        data[os.path.basename(filepath[:-4])] = content.tolist()[2:19]
+        label = np.loadtxt(filepath, delimiter=',', skiprows=1, dtype=str)
+        content = np.loadtxt('imgs.csv', delimiter=',', skiprows=1, dtype=str)
+        #data[os.path.basename(filepath[:-4])] = content.tolist()[2:19]
+        #data[os.path.basename(filepath[:-4])] = content
+        for e in label.tolist():
+            data[e[:-4]] = content[i]
+            print(e[:-4])
+            print(content[i])
+            i+=1
 
     return data
 
@@ -32,7 +40,7 @@ def main():
 
     if not os.path.isdir(args.output_path):
         os.makedirs(args.output_path)
-    save_dict(data, os.path.join(args.output_path, "aus"))
+    save_dict(data, os.path.join(args.output_path, "aus_openface"))
 
 
 if __name__ == '__main__':
