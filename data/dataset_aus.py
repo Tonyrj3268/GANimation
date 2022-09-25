@@ -101,7 +101,8 @@ class AusDataset(DatasetBase):
 
     def _get_cond_by_id(self, id):
         if id in self._conds:
-            return self._conds[id]/5.0
+            #return self._conds[id]/5.0
+            return self._conds[id].astype(np.float)/5.0
         else:
             return None
 
