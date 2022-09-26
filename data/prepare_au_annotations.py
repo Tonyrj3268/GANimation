@@ -23,19 +23,6 @@ def get_data(filepaths):
             data[e[:-4]] = content[i]
             print(e[:-4])
             print(content[i])
-            if i<1000:  
-                # 開啟輸出的 CSV 檔案
-                with open('train_ids.csv', 'w', newline='') as csvfile:
-                    # 建立 CSV 檔寫入器
-                    writer = csv.writer(csvfile)
-                    # 寫入一列資料
-                    writer.writerow([e])
-            else:
-                with open('test_ids.csv', 'w', newline='') as csvfile:
-                    # 建立 CSV 檔寫入器
-                    writer = csv.writer(csvfile)
-                    # 寫入一列資料
-                    writer.writerow([e])
             i+=1
 
     return data

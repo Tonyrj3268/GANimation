@@ -33,10 +33,10 @@ with open('sample_dataset/train_ids.csv', 'w', newline='') as csvfile_train:
             # 開啟輸出的 CSV 檔案
                 if i<1000:  
                     # 寫入一列資料
-                    writer_train.writerow([file])
+                    writer_test.writerow([file])
                     i+=1
                 else:
                         # 寫入一列資料
-                    writer_test.writerow([file])
+                    writer_train.writerow([file])
                     i+=1   
 
