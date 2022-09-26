@@ -9,7 +9,7 @@ def read_cv2_img(path):
     :return: Only returns color images
     '''
     img = cv2.imread(path, -1)
-    img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+    
     if img is not None:
         if len(img.shape) != 3:
             return None

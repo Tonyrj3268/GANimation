@@ -1,8 +1,16 @@
+from operator import attrgetter
 import os
 import csv
-path = 'sample_dataset/imgs' #文件夹目录
+import cv2
+path = r'sample_dataset/imgs' #文件夹目录
 files= os.listdir(path) #得到文件夹下的所有文件名称
 files.sort()
+for file in files:
+    #print(file)
+    pic=r'sample_dataset/imgs/{}'.format(file)
+    img = cv2.imread(pic)
+    NEWimg = cv2.resize(img, dsize=(128, 128), interpolation=cv2.INTER_AREA)
+    cv2.imwrite(pic, NEWimg)
 '''
 for file in files:
     print(file)
@@ -19,6 +27,7 @@ for file in files:
         file_oldname = os.path.join("sample_dataset\imgs", file)
         file_newname_newfile = os.path.join("sample_dataset\imgs", "000{}".format(file))
         os.rename(file_oldname, file_newname_newfile)
+'''
 '''
 i=0
 with open('sample_dataset/train_ids.csv', 'w', newline='') as csvfile_train:
@@ -40,3 +49,4 @@ with open('sample_dataset/train_ids.csv', 'w', newline='') as csvfile_train:
                     writer_train.writerow([file])
                     i+=1   
 
+'''
